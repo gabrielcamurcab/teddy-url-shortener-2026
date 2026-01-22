@@ -8,25 +8,24 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { hash } from 'bcryptjs';
-import { z } from 'zod';
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe.js';
+import { createAccountDtoSchema, CreateAccountDto, CreateAccountBody } from '../dtos/create-account.dto.js';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CreateAccountReturnDto } from '../dtos/create-account-return.dto.js';
 
-const createAccountBodySchema = z.object({
-  name: z.string(),
-  email: z.email(),
-  password: z.string().min(6),
-});
-
-type CreateAccountBodySchema = z.infer<typeof createAccountBodySchema>;
-
+@ApiTags('Auth')
 @Controller('/api/v1/auth/signup')
 export class CreateAccountController {
   constructor(private prisma: PrismaService) { }
 
   @Post()
   @HttpCode(201)
-  @UsePipes(new ZodValidationPipe(createAccountBodySchema))
-  async handle(@Body() body: CreateAccountBodySchema) {
+  @ApiOperation({ summary: 'Create a new account' })
+  @ApiBody({ type: CreateAccountBody })
+  @ApiResponse({ status: 201, type: CreateAccountReturnDto })
+  @ApiResponse({ status: 409, description: 'User with same e-mail address already exists' })
+  @UsePipes(new ZodValidationPipe(createAccountDtoSchema))
+  async handle(@Body() body: CreateAccountDto) {
     const { name, email, password } = body;
 
     const userWithSameEmail = await this.prisma.user.findUnique({
