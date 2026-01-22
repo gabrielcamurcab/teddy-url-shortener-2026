@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+
+  urls Url[]
+
+  @@map("users")
+}
+
+model Url {
+  code String @id
+  url String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  authorId String? @map("author_id")
+
+  author User? @relation(fields: [authorId], references: [id])
+
+  @@map("urls")
+}
+
+// Preciso contar a quantidade de acessos
+// 1 - Criar um counter na própria tabela
+// 2 - Criar uma tabela de registro de

@@ -1,0 +1,13 @@
+services:
+  postgres:
+    container_name: teddy-2026
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: teddy-2026
+      PG_DATA: /data/postgres
+    volumes:
+      - ./data/pg:/data/postgres
