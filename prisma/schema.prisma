@@ -19,11 +19,12 @@ model User {
 }
 
 model Url {
-  code      String    @id
-  url       String
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime? @updatedAt @map("updated_at")
-  authorId  String?   @map("author_id")
+  code        String    @id
+  url         String
+  accessCount Int       @default(0) @map("access_count")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime? @updatedAt @map("updated_at")
+  authorId    String?   @map("author_id")
 
   author User? @relation(fields: [authorId], references: [id])
 
