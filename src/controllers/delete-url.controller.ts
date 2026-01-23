@@ -3,13 +3,13 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagg
 import { CurrentUser } from "src/auth/current-user.decorator";
 import { JwtAuthGuard } from "src/auth/jwt.guard";
 import { UserPayload } from "src/auth/jwt.strategy";
+import { UrlRepository } from "src/domain/repositories/url.repository";
 import { DeleteUrlReturnDto } from "src/dtos/delete-url-return.dto";
-import { PrismaService } from "src/prisma/prisma.service";
 
 @ApiTags("Urls")
 @Controller()
 export class DeleteUrlController {
-    constructor(private prisma: PrismaService) { }
+    constructor(private urlRepository: UrlRepository) { }
 
     @Delete("api/v1/urls/:code")
     @HttpCode(200)
@@ -29,16 +29,7 @@ export class DeleteUrlController {
             throw new UnauthorizedException("Unauthorized");
         }
 
-        const droppedUrl = await this.prisma.url.delete({
-            where: {
-                code,
-                authorId
-            },
-        });
-
-        if (!droppedUrl) {
-            throw new NotFoundException("URL not found");
-        }
+        await this.urlRepository.delete(authorId, code);
 
         return {
             message: "URL dropped successfully"

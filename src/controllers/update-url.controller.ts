@@ -6,12 +6,12 @@ import { UserPayload } from "src/auth/jwt.strategy";
 import { UpdateUrlReturnDto } from "src/dtos/update-url-return.dto";
 import { UpdateUrlDtoBody, updateUrlDtoSchema } from "src/dtos/update-url.dto";
 import { ZodValidationPipe } from "src/pipes/zod-validation-pipe";
-import { PrismaService } from "src/prisma/prisma.service";
+import { UrlRepository } from "src/domain/repositories/url.repository";
 
 @ApiTags("Urls")
 @Controller()
 export class UpdateUrlController {
-    constructor(private prisma: PrismaService) { }
+    constructor(private urlRepository: UrlRepository) { }
 
     @Patch("api/v1/urls/:code")
     @HttpCode(200)
@@ -28,19 +28,7 @@ export class UpdateUrlController {
     ) {
         const authorId = user.sub;
 
-        const updatedUrl = await this.prisma.url.update({
-            where: {
-                code,
-                authorId
-            },
-            data: {
-                url: body.url
-            }
-        });
-
-        if (!updatedUrl) {
-            throw new NotFoundException("URL not found");
-        }
+        await this.urlRepository.update(authorId, code, body);
 
         return {
             message: "URL updated successfully"

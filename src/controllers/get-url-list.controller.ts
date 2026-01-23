@@ -3,13 +3,13 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagg
 import { CurrentUser } from "src/auth/current-user.decorator";
 import { JwtAuthGuard } from "src/auth/jwt.guard";
 import { UserPayload } from "src/auth/jwt.strategy";
+import { UrlRepository } from "src/domain/repositories/url.repository";
 import { GetUrlListReturnDto } from "src/dtos/get-url-list-return.dto";
-import { PrismaService } from "src/prisma/prisma.service";
 
 @ApiTags("Urls")
 @Controller()
 export class GetUrlListController {
-    constructor(private prisma: PrismaService) { }
+    constructor(private urlRepository: UrlRepository) { }
 
     @Get("/api/v1/urls")
     @ApiBearerAuth()
@@ -24,18 +24,7 @@ export class GetUrlListController {
     ) {
         const authorId = user.sub;
 
-        const urlsList = await this.prisma.url.findMany({
-            where: {
-                authorId,
-            },
-            select: {
-                code: true,
-                url: true,
-                accessCount: true,
-                createdAt: true,
-                updatedAt: true,
-            }
-        });
+        const urlsList = await this.urlRepository.findAll(authorId);
 
         return {
             urls: urlsList,
