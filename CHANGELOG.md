@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/compare/v0.2.0...v0.3.0) (2026-01-23)
+
+
+### Features
+
+* implements GET /:code url ([a96c860](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/commit/a96c860798dfcf43f3257f623a4c0dc38f0ca468))
+
 ## [0.2.0](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/compare/v0.1.1...v0.2.0) (2026-01-23)
 
 
