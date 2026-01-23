@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.1](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/compare/v0.5.0...v0.6.1) (2026-01-23)
+
+
+### Features
+
+* add url entity ([393c32f](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/commit/393c32f018b18dd6fa8bd261133c87a1b9020db4))
+* add user entity ([08c6667](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/commit/08c66676e6bfd44396397c4ee7760c899fc51bdd))
+* implements PATCH /api/v1/urls/:code endpoint ([d59e970](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/commit/d59e970f9c1f33854a2ee2652dbb51a6377ebe34))
+
+
+### Bug Fixes
+
+* url entity ([6161ac9](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/commit/6161ac9ef156f057eb6d43f65abcf2842ae467d7))
+
 ## [0.6.0](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/compare/v0.5.0...v0.6.0) (2026-01-23)
 
 
