@@ -9,7 +9,7 @@ export class GetUrlController {
 
     @Get("/:code")
     @Redirect()
-    @ApiOperation({ summary: "Get URL by code" })
+    @ApiOperation({ summary: "Performs a 307 redirect to the original URL. Swagger UI cannot follow this redirect properly — access it directly in the browser." })
     @ApiResponse({ status: 307, description: "Temporary Redirect" })
     @ApiResponse({ status: 404, description: "URL not found" })
     async get(
