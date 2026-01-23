@@ -17,8 +17,8 @@ import { JwtStrategy } from "./jwt.strategy.js";
 
                 return {
                     signOptions: { algorithm: 'RS256' },
-                    privateKey: `-----BEGIN PRIVATE KEY-----\n${privateKey}\n-----END PRIVATE KEY-----`,
-                    publicKey: `-----BEGIN PUBLIC KEY-----\n${publicKey}\n-----END PUBLIC KEY-----`,
+                    privateKey: Buffer.from(privateKey, 'base64'),
+                    publicKey: Buffer.from(publicKey, 'base64'),
                 }
             }
         })
