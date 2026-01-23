@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/compare/v0.4.0...v0.5.0) (2026-01-23)
+
+
+### Features
+
+* implements DELETE /api/v1/urls/:code endpoint ([dead078](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/commit/dead07858c24e73ab62101c35a216731de37b9e8))
+
 ## [0.4.0](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/compare/v0.3.0...v0.4.0) (2026-01-23)
 
 
