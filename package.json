@@ -1,6 +1,6 @@
 {
   "name": "teddy-url-shortener-2026",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "URL Shortener API",
   "author": "Gabriel Camurça Bezerra",
   "private": false,
@@ -18,9 +18,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "release:major": "standard-version --release-type major",
-    "release:minor": "standard-version --release-type minor",
-    "release:patch": "standard-version --release-type patch"
+    "release:major": "standard-version --release-as major",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
