@@ -10,6 +10,10 @@ import { GetUrlController } from './controllers/get-url.controller';
 import { GetUrlListController } from './controllers/get-url-list.controller';
 import { DeleteUrlController } from './controllers/delete-url.controller';
 import { UpdateUrlController } from './controllers/update-url.controller';
+import { UserRepository } from './domain/repositories/user.repository';
+import { PrismaUserRepository } from './domain/repositories/prisma/prisma-user.repository';
+import { UrlRepository } from './domain/repositories/url.repository';
+import { PrismaUrlRepository } from './domain/repositories/prisma/prisma-url.repository';
 
 @Module({
   imports: [
@@ -20,6 +24,16 @@ import { UpdateUrlController } from './controllers/update-url.controller';
     AuthModule
   ],
   controllers: [CreateAccountController, AuthenticateController, CreateUrlController, GetUrlController, GetUrlListController, DeleteUrlController, UpdateUrlController],
-  providers: [PrismaService],
+  providers: [
+    PrismaService,
+    {
+      provide: UserRepository,
+      useClass: PrismaUserRepository
+    },
+    {
+      provide: UrlRepository,
+      useClass: PrismaUrlRepository
+    }
+  ],
 })
-export class AppModule { }
+export class AppModule { }  

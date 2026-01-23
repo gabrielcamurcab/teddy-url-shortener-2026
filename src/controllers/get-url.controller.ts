@@ -1,11 +1,11 @@
 import { Controller, Get, NotFoundException, Param, Redirect } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { PrismaService } from "src/prisma/prisma.service";
+import { UrlRepository } from "src/domain/repositories/url.repository";
 
 @ApiTags("Urls")
 @Controller()
 export class GetUrlController {
-    constructor(private prisma: PrismaService) { }
+    constructor(private urlRepository: UrlRepository) { }
 
     @Get("/:code")
     @Redirect()
@@ -15,26 +15,13 @@ export class GetUrlController {
     async get(
         @Param('code') code: string,
     ) {
-        const urlData = await this.prisma.url.findUnique({
-            where: {
-                code,
-            },
-        });
+        const urlData = await this.urlRepository.findByShortUrl(code);
 
         if (!urlData) {
             throw new NotFoundException("URL not found");
         }
 
-        await this.prisma.url.update({
-            where: {
-                code,
-            },
-            data: {
-                accessCount: {
-                    increment: 1,
-                },
-            },
-        })
+        await this.urlRepository.updateAccessCount(code);
 
         return {
             url: urlData.url,

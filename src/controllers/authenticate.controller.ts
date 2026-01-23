@@ -6,12 +6,13 @@ import { JwtService } from "@nestjs/jwt";
 import { authenticateDtoSchema, AuthenticateDto, AuthenticateBody } from "../dtos/authenticate.dto.js";
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { AuthenticateReturnDto } from "../dtos/authenticate-return.dto.js";
+import { UserRepository } from "../domain/repositories/user.repository.js";
 
 @ApiTags('Auth')
 @Controller('/api/v1/auth/login')
 export class AuthenticateController {
     constructor(
-        private prisma: PrismaService,
+        private userRepository: UserRepository,
         private jwt: JwtService
     ) { }
 
@@ -25,7 +26,7 @@ export class AuthenticateController {
     async handle(@Body() body: AuthenticateDto) {
         const { email, password } = body;
 
-        const user = await this.prisma.user.findUnique({ where: { email } });
+        const user = await this.userRepository.findByEmail(email);
 
         if (!user) {
             throw new UnauthorizedException('Users credentials do not match.');
