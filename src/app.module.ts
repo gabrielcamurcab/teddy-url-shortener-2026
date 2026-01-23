@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { envSchema } from './env';
 import { AuthModule } from './auth/auth.module';
 import { CreateUrlController } from './controllers/create-url.controller';
+import { GetUrlController } from './controllers/get-url.controller';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { CreateUrlController } from './controllers/create-url.controller';
     }),
     AuthModule
   ],
-  controllers: [CreateAccountController, AuthenticateController, CreateUrlController],
+  controllers: [CreateAccountController, AuthenticateController, CreateUrlController, GetUrlController],
   providers: [PrismaService],
 })
 export class AppModule { }
