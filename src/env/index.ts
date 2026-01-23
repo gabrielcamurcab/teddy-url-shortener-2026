@@ -5,7 +5,11 @@ export const envSchema = z.object({
     DATABASE_URL: z.string(),
     PORT: z.coerce.number().optional().default(3000),
     JWT_PRIVATE_KEY: z.string(),
-    JWT_PUBLIC_KEY: z.string()
+    JWT_PUBLIC_KEY: z.string(),
+    JWT_EXPIRES_IN: z.string().optional().default("1d"),
+    JWT_ALGORITHM: z.string().optional().default("RS256"),
+    SERVER_URL: z.string(),
+
 });
 
 const _env = envSchema.safeParse(process.env);
