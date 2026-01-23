@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/compare/v0.3.0...v0.4.0) (2026-01-23)
+
+
+### Features
+
+* implements GET /api/v1/urls endpoint ([f7675b7](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/commit/f7675b7183b162fec2275da725def95b24e29173))
+
 ## [0.3.0](https://github.com/gabrielcamurcab/teddy-url-shortener-2026/compare/v0.2.0...v0.3.0) (2026-01-23)
 
 

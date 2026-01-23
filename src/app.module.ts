@@ -7,6 +7,7 @@ import { envSchema } from './env';
 import { AuthModule } from './auth/auth.module';
 import { CreateUrlController } from './controllers/create-url.controller';
 import { GetUrlController } from './controllers/get-url.controller';
+import { GetUrlListController } from './controllers/get-url-list.controller';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { GetUrlController } from './controllers/get-url.controller';
     }),
     AuthModule
   ],
-  controllers: [CreateAccountController, AuthenticateController, CreateUrlController, GetUrlController],
+  controllers: [CreateAccountController, AuthenticateController, CreateUrlController, GetUrlController, GetUrlListController],
   providers: [PrismaService],
 })
 export class AppModule { }
