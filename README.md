@@ -4,12 +4,18 @@ A robust URL shortener API built with **NestJS**, **Prisma**, and **PostgreSQL**
 
 ## Table of Contents
 
+- [Production Deployment](#production-deployment)
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Running the App](#running-the-app)
 - [Documentation](#documentation)
 - [License](#license)
+
+## Production Deployment
+
+In this link you can access the production deployment of the API:
+[Access this link](https://teddy-url-shortener-2026-production.up.railway.app/api)
 
 ## Features
 
