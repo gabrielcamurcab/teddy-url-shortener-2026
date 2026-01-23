@@ -1,12 +1,12 @@
 export class Url {
-    id: string
     code: string
-    originalUrl: string
+    url: string
+    accessCount: number
     createdAt: Date
-    updatedAt: Date
-    ownerId?: string
+    updatedAt: Date | null
+    authorId?: string | null
 
     constructor(props: Url) {
         Object.assign(this, props)
     }
-}
+}   
