@@ -9,6 +9,7 @@ import { CreateUrlController } from './controllers/create-url.controller';
 import { GetUrlController } from './controllers/get-url.controller';
 import { GetUrlListController } from './controllers/get-url-list.controller';
 import { DeleteUrlController } from './controllers/delete-url.controller';
+import { UpdateUrlController } from './controllers/update-url.controller';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { DeleteUrlController } from './controllers/delete-url.controller';
     }),
     AuthModule
   ],
-  controllers: [CreateAccountController, AuthenticateController, CreateUrlController, GetUrlController, GetUrlListController, DeleteUrlController],
+  controllers: [CreateAccountController, AuthenticateController, CreateUrlController, GetUrlController, GetUrlListController, DeleteUrlController, UpdateUrlController],
   providers: [PrismaService],
 })
 export class AppModule { }
