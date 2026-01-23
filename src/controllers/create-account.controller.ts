@@ -6,17 +6,17 @@ import {
   Post,
   UsePipes,
 } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service.js';
 import { hash } from 'bcryptjs';
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe.js';
 import { createAccountDtoSchema, CreateAccountDto, CreateAccountBody } from '../dtos/create-account.dto.js';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateAccountReturnDto } from '../dtos/create-account-return.dto.js';
+import { UserRepository } from '../domain/repositories/user.repository.js';
 
 @ApiTags('Auth')
 @Controller('/api/v1/auth/signup')
 export class CreateAccountController {
-  constructor(private prisma: PrismaService) { }
+  constructor(private userRepository: UserRepository) { }
 
   @Post()
   @HttpCode(201)
@@ -28,11 +28,7 @@ export class CreateAccountController {
   async handle(@Body() body: CreateAccountDto) {
     const { name, email, password } = body;
 
-    const userWithSameEmail = await this.prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
+    const userWithSameEmail = await this.userRepository.findByEmail(email);
 
     if (userWithSameEmail) {
       throw new ConflictException(
@@ -42,12 +38,10 @@ export class CreateAccountController {
 
     const hashedPassword = await hash(password, 8);
 
-    await this.prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashedPassword,
-      },
+    await this.userRepository.create({
+      name,
+      email,
+      password: hashedPassword,
     });
 
     return { message: 'Account created successfully' };
