@@ -42,6 +42,33 @@ git clone https://github.com/gabrielcamurcab/teddy-url-shortener-2026
    cp .env.example .env
    ```
 
+   **Generate JWT Keys (Base64):**
+
+   To properly secure the application, generate a new pair of RSA keys in Base64 format.
+
+   **Linux / macOS:**
+
+   ```bash
+   # Generate keys
+   openssl genpkey -algorithm RSA -out private.pem -pkeyopt rsa_keygen_bits:2048
+   openssl rsa -pubout -in private.pem -out public.pem
+
+   # Print Base64 values
+   echo "JWT_PRIVATE_KEY=$(base64 -w 0 private.pem)"
+   echo "JWT_PUBLIC_KEY=$(base64 -w 0 public.pem)"
+
+   # Cleanup
+   rm private.pem public.pem
+   ```
+
+   **Windows (PowerShell):**
+
+   ```powershell
+   node -e "const { generateKeyPairSync } = require('crypto'); const { privateKey, publicKey } = generateKeyPairSync('rsa', { modulusLength: 2048, publicKeyEncoding: { type: 'spki', format: 'pem' }, privateKeyEncoding: { type: 'pkcs8', format: 'pem' } }); console.log('JWT_PRIVATE_KEY=' + Buffer.from(privateKey).toString('base64')); console.log('JWT_PUBLIC_KEY=' + Buffer.from(publicKey).toString('base64'));"
+   ```
+
+**Copy the generated keys to the .env file**
+
 3. **Start the Database**
 
    Use Docker Compose to spin up the PostgreSQL database:
